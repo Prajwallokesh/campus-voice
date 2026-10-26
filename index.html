@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government Engineering College Hassan | Campus Voice</title>
+  <link rel="icon" type="image/png" href="./assets/logo.png" />
+
+  <!-- Tailwind CSS Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            baskerville: ['Libre Baskerville', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+            quicksand: ['Quicksand', 'sans-serif'],
+          },
+          colors: {
+            brand: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a', 950: '#172554' },
+          },
+          screens: { xs: '420px' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, Libre Baskerville, Poppins & Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,600;1,600&family=Poppins:wght@400;500;600;700;800&family=Quicksand:wght@700&display=swap"
+    rel="stylesheet">
+
+  <!-- Scrollbar, Nav and Card Styles -->
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    header,
+    header * {
+      font-family: 'Quicksand', sans-serif !important;
+    }
+
+    .announcement-card,
+    .announcement-card *:not(p) {
+      font-family: 'Poppins', sans-serif !important;
+    }
+
+    .announcement-card p {
+      font-family: 'Libre Baskerville', serif !important;
+    }
+
+    .announcement-card {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.07), 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+      transition: all 0.25s ease-out;
+    }
+
+    .announcement-card:hover {
+      box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.12), 0 8px 16px -3px rgba(15, 23, 42, 0.06);
+      transform: translateY(-2px);
+    }
+
+    /* College Calendar Styles */
+    .cal-day-cell {
+      min-height: 48px;
+      transition: all 0.15s ease-out;
+    }
+
+    .cal-day-cell:hover:not(.empty-day) {
+      background-color: #f1f5f9;
+      transform: scale(1.02);
+    }
+
+    .cal-day-cell.selected-day {
+      background-color: #eff6ff !important;
+      border-color: #2563eb !important;
+      color: #1d4ed8 !important;
+      font-weight: 700;
+    }
+
+    .cal-day-cell.is-today {
+      border: 2px solid #2563eb !important;
+      background-color: #f8fafc;
+    }
+
+    @keyframes highlightCard {
+      0% {
+        transform: scale(0.98);
+      }
+
+      50% {
+        transform: scale(1.01);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .card-top-bump {
+      animation: highlightCard 0.4s ease-out;
+    }
+  </style>
+
+  <!-- Separate Mobile App Responsiveness Stylesheet -->
+  <link rel="stylesheet" href="./responsive.css" />
+</head>
+
+<body
+  class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col overflow-x-hidden w-full">
+
+  <!-- Top Navigation Bar -->
+  <header class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+      <!-- College Logo and Name -->
+      <a href="#top" class="flex items-center gap-2 sm:gap-3.5 min-w-0 group">
+        <img src="./assets/logo.png" alt="Government of Karnataka Emblem - GEC Hassan Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain flex-shrink-0 drop-shadow-sm group-hover:scale-105 transition-transform duration-200" />
+        <div class="min-w-0">
+          <h1
+            class="font-quicksand font-bold text-xs xs:text-sm sm:text-base md:text-xl tracking-tight text-slate-900 uppercase leading-snug whitespace-normal">
+            Government Engineering College Hassan</h1>
+          <p
+            class="text-[12px] sm:text-xs font-semibold text-slate-500 flex items-center gap-1 sm:gap-1.5 mt-0.5 truncate">
+            <span>ಸರ್ಕಾರಿ ಇಂಜಿನಿಯರಿಂಗ್ ಕಾಲೇಜು, ಹಾಸನ</span>
+            <span class="hidden sm:inline text-slate-300">•</span>
+            <span class="hidden md:inline text-brand-700 font-medium">Affiliated to VTU</span>
+          </p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-2">
+        <a href="#calendar"
+          class="font-quicksand inline-flex items-center gap-1.5 text-slate-700 hover:text-brand-700 font-bold text-sm px-3 py-2 rounded-xl hover:bg-slate-100 transition flex-shrink-0 whitespace-nowrap">
+          <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>Calendar</span>
+        </a>
+        <a href="#smart-qr"
+          class="font-quicksand inline-flex items-center gap-1.5 text-slate-700 hover:text-brand-700 font-bold text-sm px-3 py-2 rounded-xl hover:bg-slate-100 transition flex-shrink-0 whitespace-nowrap">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+          </svg>
+          <span>Smart QR Report</span>
+        </a>
+        <a href="#feed"
+          class="font-quicksand inline-flex items-center gap-2 bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white font-bold text-sm px-4 sm:px-5 py-2.5 rounded-xl hover:from-brand-700 hover:to-brand-900 shadow-md shadow-brand-700/25 active:scale-95 transition-all duration-150 flex-shrink-0 whitespace-nowrap">
+          <span>Explore Announcements</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="top"
+    class="relative flex items-center justify-center overflow-hidden py-8 xs:py-10 sm:py-20 md:py-28 px-3 sm:px-6 lg:px-8 min-h-0 sm:min-h-[55vh] lg:min-h-[70vh]">
+    <!-- Campus Background Image -->
+    <img src="./assets/campus.png" alt="Government Engineering College Hassan Campus"
+      class="absolute inset-0 w-full h-full object-cover object-center z-0 transition-transform duration-700" />
+
+    <!-- Slightly Bluish Light Overlay -->
+    <div class="absolute inset-0 bg-blue-950/40 backdrop-blur-[1px] z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-900/40 via-sky-950/20 to-blue-950/55 z-10"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-20 max-w-5xl mx-auto text-center text-white px-2">
+      <!-- Title & Tagline -->
+      <div class="mb-3.5 sm:mb-6">
+        <h1
+          class="font-display font-black text-[2.2rem] xs:text-[2.65rem] sm:text-5xl md:text-6xl lg:text-9xl tracking-tight text-white uppercase drop-shadow-[0_4px_22px_rgba(0,0,0,0.85)] leading-tight whitespace-nowrap">
+          Campus <span
+            class="bg-gradient-to-r from-blue-200 via-sky-100 to-amber-200 bg-clip-text text-transparent">Voice</span>
+        </h1>
+        <p
+          class="font-display text-sm xs:text-base sm:text-lg md:text-xl lg:text-3xl font-bold text-blue-100 tracking-wider mt-1.5 sm:mt-2.5 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
+          One campus. One voice.</p>
+      </div>
+
+      <!-- Accent Divider -->
+      <div
+        class="w-12 sm:w-20 h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent mx-auto mb-3 sm:mb-6 rounded-full shadow-sm">
+      </div>
+
+      <!-- Hero Heading and Description -->
+      <h2
+        class="font-display text-base xs:text-lg sm:text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight max-w-2xl mx-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+        What's happening on campus?</h2>
+      <p
+        class="text-[11px] xs:text-xs sm:text-base text-slate-100 font-medium mt-1.5 sm:mt-3 leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] px-1">
+        Stay updated with the latest announcements, academic schedules, placement drives, and cultural celebrations.</p>
+
+      <!-- New Announcement Button -->
+      <div class="mt-4 sm:mt-7 flex items-center justify-center">
+        <button type="button" id="openModalBtnHero"
+          class="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white text-xs sm:text-base font-bold shadow-xl shadow-brand-900/50 hover:from-brand-500 hover:to-brand-700 active:scale-95 transition-all duration-150 ring-2 ring-white/30 cursor-pointer">
+          <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.5"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          <span>New Announcement</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements Section (Existing Place After Home Page) -->
+  <main id="feed" class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 w-full">
+    <!-- Section Header with Add Announcement Button -->
+    <div class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2.5 h-2.5 rounded-full bg-brand-600"></span>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-700">Official Bulletin</span>
+        </div>
+        <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Latest Announcements
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">Verified circulars and updates from college departments and
+          administration</p>
+      </div>
+
+      <!-- Add Announcement Action Button -->
+      <div>
+        <button type="button" id="openModalBtnSection"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow active:scale-95 transition cursor-pointer flex-shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          <span>Add Announcement</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Feature Input -->
+    <div class="relative max-w-xl mb-6 group">
+      <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-600 pointer-events-none transition group-focus-within:text-brand-700">
+        <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="Search announcements by title, department, keyword..."
+        class="w-full pl-10 sm:pl-11 pr-10 py-2.5 sm:py-3 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm rounded-xl sm:rounded-2xl border-2 border-brand-500 hover:border-brand-600 focus:border-brand-700 focus:outline-none focus:ring-4 focus:ring-brand-500/20 shadow-sm hover:shadow-md transition duration-200" />
+      <button type="button" id="clearSearchBtn"
+        class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+        title="Clear search">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Filters & Sort Options Bar -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/80 pb-4">
+      <!-- Category Filter Buttons -->
+      <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar">
+        <!-- All Category Filter -->
+        <button type="button" data-category="all"
+          class="filter-btn active inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition duration-150 shadow-sm bg-brand-700 text-white flex-shrink-0 cursor-pointer">
+          <span>All</span>
+          <span class="count-badge bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">4</span>
+        </button>
+
+        <!-- Academic Category Filter -->
+        <button type="button" data-category="academic"
+          class="filter-btn inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition duration-150 bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 flex-shrink-0 cursor-pointer">
+          <span>Academic</span>
+          <span
+            class="count-badge bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-slate-200">2</span>
+        </button>
+
+        <!-- Events Category Filter -->
+        <button type="button" data-category="events"
+          class="filter-btn inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition duration-150 bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 flex-shrink-0 cursor-pointer">
+          <span>Events</span>
+          <span
+            class="count-badge bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-slate-200">1</span>
+        </button>
+
+        <!-- Placement Category Filter -->
+        <button type="button" data-category="placement"
+          class="filter-btn inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition duration-150 bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 flex-shrink-0 cursor-pointer">
+          <span>Placement</span>
+          <span
+            class="count-badge bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-slate-200">1</span>
+        </button>
+      </div>
+
+      <!-- Sort Dropdown in Sort Area -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <label for="sortSelect" class="text-xs font-semibold text-slate-500 flex items-center gap-1.5 flex-shrink-0">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+          </svg>
+          <span>Sort by:</span>
+        </label>
+        <div class="relative inline-block">
+          <select id="sortSelect"
+            class="appearance-none bg-white text-slate-800 text-xs sm:text-sm font-semibold pl-3.5 pr-8 py-2 rounded-xl border border-slate-200 hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 shadow-xs cursor-pointer transition">
+            <option value="likes">Highest Liked / Important</option>
+            <option value="az">Alphabetical (A to Z)</option>
+            <option value="priority">Priority (High to Low)</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Results Summary -->
+    <div class="flex items-center justify-between text-xs text-slate-500 font-medium mb-5 px-1">
+      <div>Showing <span id="visibleCount" class="font-bold text-slate-900">4</span> announcements</div>
+      <div id="sortStatusLabel" class="text-brand-700 font-semibold hidden sm:inline">Highest Liked / Important</div>
+    </div>
+
+    <!-- Announcement Cards Grid -->
+    <div id="cardGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+      <!-- Card 1: Academic -->
+      <article data-id="default-card-1" data-category="academic" data-title="Internal Assessment Schedule"
+        data-priority="3" data-likes="18"
+        class="announcement-card bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+        <div class="p-4 sm:p-6">
+          <div class="flex items-center justify-between gap-2">
+            <span
+              class="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-2.5 sm:px-3 py-1 rounded-lg border border-brand-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span>
+              ACADEMIC
+            </span>
+            <div class="flex items-center gap-2">
+              <span
+                class="text-[10px] sm:text-[11px] font-semibold text-red-600 bg-red-50 border border-red-200/80 px-2 py-0.5 rounded-md">Mandatory</span>
+              <!-- Like / Important Button -->
+              <button type="button"
+                class="like-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border border-slate-200 bg-slate-50 hover:bg-rose-50 hover:border-rose-300 text-slate-600 hover:text-rose-600 text-xs font-bold transition-all active:scale-90"
+                title="Click to like / mark as important (Highest liked card goes to top)">
+                <svg class="heart-icon w-3.5 h-3.5 text-slate-400 group-hover:text-rose-500 transition-colors"
+                  fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                <span class="like-label font-medium hidden sm:inline">Important</span>
+                <span
+                  class="like-count text-[11px] font-extrabold text-slate-700 bg-white px-1.5 py-0.2 rounded border border-slate-200">18</span>
+              </button>
+            </div>
+          </div>
+          <h3
+            class="font-poppins text-lg sm:text-xl font-bold text-slate-900 mt-3 sm:mt-4 group-hover:text-brand-700 transition-colors">
+            Internal Assessment Schedule</h3>
+          <p class="font-baskerville text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">Internal assessments begin
+            next Monday. Check your department timetable for subject-wise timings, room allocations, and invigilation
+            guidelines. Students must carry valid college ID cards.</p>
+          <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-100">
+            <a href="#"
+              class="inline-flex items-center gap-2 text-xs font-semibold text-brand-700 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-200 px-3 sm:px-3.5 py-2 rounded-xl transition duration-150 w-full sm:w-auto">
+              <svg class="h-4 w-4 text-brand-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828L18 9.828A4 4 0 0012.343 4.17L5.757 10.757a6 6 0 108.486 8.486L20.5 13" />
+              </svg>
+              <span class="truncate">IA_Schedule_Oct2026.pdf</span>
+              <span class="text-[10px] text-slate-400 font-bold ml-auto">(420 KB)</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="bg-slate-50/80 px-4 sm:px-6 py-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="font-medium text-slate-700">24 October 2026</span>
+            <span class="text-slate-300">•</span>
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>10:30 AM</span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] text-slate-400 font-medium">HOD Academic Cell</span>
+        </div>
+      </article>
+
+      <!-- Card 2: Placement -->
+      <article data-id="default-card-2" data-category="placement" data-title="TCS Campus Recruitment Drive — 2026 Batch"
+        data-priority="2" data-likes="24"
+        class="announcement-card bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+        <div class="p-4 sm:p-6">
+          <div class="flex items-center justify-between gap-2">
+            <span
+              class="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-amber-700 uppercase bg-amber-50 px-2.5 sm:px-3 py-1 rounded-lg border border-amber-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              PLACEMENT
+            </span>
+            <div class="flex items-center gap-2">
+              <span
+                class="text-[10px] sm:text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">Package:
+                7.5 - 12 LPA</span>
+              <!-- Like / Important Button -->
+              <button type="button"
+                class="like-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border border-slate-200 bg-slate-50 hover:bg-rose-50 hover:border-rose-300 text-slate-600 hover:text-rose-600 text-xs font-bold transition-all active:scale-90"
+                title="Click to like / mark as important (Highest liked card goes to top)">
+                <svg class="heart-icon w-3.5 h-3.5 text-slate-400 group-hover:text-rose-500 transition-colors"
+                  fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                <span class="like-label font-medium hidden sm:inline">Important</span>
+                <span
+                  class="like-count text-[11px] font-extrabold text-slate-700 bg-white px-1.5 py-0.2 rounded border border-slate-200">24</span>
+              </button>
+            </div>
+          </div>
+          <h3
+            class="font-poppins text-lg sm:text-xl font-bold text-slate-900 mt-3 sm:mt-4 group-hover:text-amber-700 transition-colors">
+            TCS Campus Recruitment Drive — 2026 Batch</h3>
+          <p class="font-baskerville text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">TCS National Qualifier Test
+            (NQT) shortlist is released. Selected candidates must attend the pre-placement orientation in the College
+            Auditorium on 28th October, followed by direct technical and HR interviews.</p>
+          <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-100">
+            <a href="#"
+              class="inline-flex items-center gap-2 text-xs font-semibold text-amber-800 bg-amber-50/60 hover:bg-amber-100/80 border border-amber-200 px-3 sm:px-3.5 py-2 rounded-xl transition duration-150 w-full sm:w-auto">
+              <svg class="h-4 w-4 text-amber-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828L18 9.828A4 4 0 0012.343 4.17L5.757 10.757a6 6 0 108.486 8.486L20.5 13" />
+              </svg>
+              <span class="truncate">TCS_Selected_Candidates_List.pdf</span>
+              <span class="text-[10px] text-slate-400 font-bold ml-auto">(1.8 MB)</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="bg-slate-50/80 px-4 sm:px-6 py-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="font-medium text-slate-700">23 October 2026</span>
+            <span class="text-slate-300">•</span>
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>04:15 PM</span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] text-slate-400 font-medium">Placement Officer</span>
+        </div>
+      </article>
+
+      <!-- Card 3: Events -->
+      <article data-id="default-card-3" data-category="events" data-title="Annual Cultural Fest — Rhythm 2026"
+        data-priority="1" data-likes="15"
+        class="announcement-card bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+        <div class="p-4 sm:p-6">
+          <div class="flex items-center justify-between gap-2">
+            <span
+              class="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-emerald-700 uppercase bg-emerald-50 px-2.5 sm:px-3 py-1 rounded-lg border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              EVENTS
+            </span>
+            <div class="flex items-center gap-2">
+              <span
+                class="text-[10px] sm:text-[11px] font-semibold text-purple-700 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-md">3-Day
+                Fest</span>
+              <!-- Like / Important Button -->
+              <button type="button"
+                class="like-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border border-slate-200 bg-slate-50 hover:bg-rose-50 hover:border-rose-300 text-slate-600 hover:text-rose-600 text-xs font-bold transition-all active:scale-90"
+                title="Click to like / mark as important (Highest liked card goes to top)">
+                <svg class="heart-icon w-3.5 h-3.5 text-slate-400 group-hover:text-rose-500 transition-colors"
+                  fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                <span class="like-label font-medium hidden sm:inline">Important</span>
+                <span
+                  class="like-count text-[11px] font-extrabold text-slate-700 bg-white px-1.5 py-0.2 rounded border border-slate-200">15</span>
+              </button>
+            </div>
+          </div>
+          <h3
+            class="font-poppins text-lg sm:text-xl font-bold text-slate-900 mt-3 sm:mt-4 group-hover:text-emerald-700 transition-colors">
+            Annual Cultural Fest — Rhythm 2026</h3>
+          <p class="font-baskerville text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">Registrations are open for
+            battle of the bands, classical solo dance, hackathons, and street plays. Cash prizes worth ₹2,50,000 to be
+            won. Last date to register college teams is 29 October.</p>
+          <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-100">
+            <a href="#"
+              class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50/60 hover:bg-emerald-100/80 border border-emerald-200 px-3 sm:px-3.5 py-2 rounded-xl transition duration-150 w-full sm:w-auto">
+              <svg class="h-4 w-4 text-emerald-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828L18 9.828A4 4 0 0012.343 4.17L5.757 10.757a6 6 0 108.486 8.486L20.5 13" />
+              </svg>
+              <span class="truncate">Fest_Event_Rulebook_2026.pdf</span>
+              <span class="text-[10px] text-slate-400 font-bold ml-auto">(3.4 MB)</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="bg-slate-50/80 px-4 sm:px-6 py-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="font-medium text-slate-700">22 October 2026</span>
+            <span class="text-slate-300">•</span>
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>11:00 AM</span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] text-slate-400 font-medium">Cultural Secretary</span>
+        </div>
+      </article>
+
+      <!-- Card 4: Academic -->
+      <article data-id="default-card-4" data-category="academic" data-title="Odd Semester VTU Exam Hall Ticket Portal"
+        data-priority="2" data-likes="12"
+        class="announcement-card bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+        <div class="p-4 sm:p-6">
+          <div class="flex items-center justify-between gap-2">
+            <span
+              class="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-2.5 sm:px-3 py-1 rounded-lg border border-brand-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span>
+              ACADEMIC
+            </span>
+            <div class="flex items-center gap-2">
+              <span
+                class="text-[10px] sm:text-[11px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">VTU
+                Update</span>
+              <!-- Like / Important Button -->
+              <button type="button"
+                class="like-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl border border-slate-200 bg-slate-50 hover:bg-rose-50 hover:border-rose-300 text-slate-600 hover:text-rose-600 text-xs font-bold transition-all active:scale-90"
+                title="Click to like / mark as important (Highest liked card goes to top)">
+                <svg class="heart-icon w-3.5 h-3.5 text-slate-400 group-hover:text-rose-500 transition-colors"
+                  fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                <span class="like-label font-medium hidden sm:inline">Important</span>
+                <span
+                  class="like-count text-[11px] font-extrabold text-slate-700 bg-white px-1.5 py-0.2 rounded border border-slate-200">12</span>
+              </button>
+            </div>
+          </div>
+          <h3
+            class="font-poppins text-lg sm:text-xl font-bold text-slate-900 mt-3 sm:mt-4 group-hover:text-brand-700 transition-colors">
+            Odd Semester VTU Exam Hall Ticket Portal</h3>
+          <p class="font-baskerville text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">Eligible 3rd, 5th, and 7th
+            semester students can now download hall tickets from the VTU student portal. Ensure all departmental
+            laboratory dues are cleared and exam application forms verified by mentor.</p>
+          <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-slate-100">
+            <a href="#"
+              class="inline-flex items-center gap-2 text-xs font-semibold text-brand-700 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-200 px-3 sm:px-3.5 py-2 rounded-xl transition duration-150 w-full sm:w-auto">
+              <svg class="h-4 w-4 text-brand-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828L18 9.828A4 4 0 0012.343 4.17L5.757 10.757a6 6 0 108.486 8.486L20.5 13" />
+              </svg>
+              <span class="truncate">Hall_Ticket_Download_Steps.pdf</span>
+              <span class="text-[10px] text-slate-400 font-bold ml-auto">(610 KB)</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="bg-slate-50/80 px-4 sm:px-6 py-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="font-medium text-slate-700">21 October 2026</span>
+            <span class="text-slate-300">•</span>
+            <svg class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>02:45 PM</span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] text-slate-400 font-medium">Exam Controller</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Empty State Message When Nothing Found -->
+    <div id="noResults" class="hidden text-center py-14 px-4">
+      <div
+        class="w-14 h-14 mx-auto rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center text-amber-600 mb-3.5 shadow-xs">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 9v3m0 3h.01" />
+        </svg>
+      </div>
+      <h3 class="font-display font-bold text-slate-900 text-base sm:text-lg">No announcements found</h3>
+      <p id="noResultsMsg" class="text-xs sm:text-sm text-slate-500 mt-1 max-w-md mx-auto leading-relaxed">We couldn't
+        find any announcements matching your search or selected filter.</p>
+      <div class="mt-5">
+        <button type="button" id="resetFiltersBtn"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs sm:text-sm font-semibold shadow-sm transition active:scale-95 cursor-pointer">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Reset Search & Filters</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- College Calendar Section -->
+  <section id="calendar" class="relative py-12 sm:py-16 bg-slate-50/70 border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      
+      <!-- Calendar Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold tracking-wide uppercase mb-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>Academic Schedule</span>
+          </div>
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+            College & VTU Calendar
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+            Track semester timelines, internal assessments, VTU theory and practical exams, holidays, and campus events at GEC Hassan.
+          </p>
+        </div>
+
+        <!-- Quick Event Indicators Legend -->
+        <div class="flex flex-wrap items-center gap-2.5 text-xs text-slate-600 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm">
+          <span class="font-semibold text-slate-800">Legend:</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>Exam</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-600"></span>Academic</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>Holiday</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>Event</span>
+        </div>
+      </div>
+
+      <!-- Calendar Main Card Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-sm p-4 sm:p-6 lg:p-7">
+        
+        <!-- Left Side: Interactive Calendar (7 Cols) -->
+        <div class="lg:col-span-7 flex flex-col justify-between">
+          
+          <!-- Month Header & Controls -->
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+            <div>
+              <h3 id="currentMonthYear" class="font-display font-black text-xl sm:text-2xl text-slate-900">
+                October 2026
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">Click any date to view scheduled events</p>
+            </div>
+            
+            <!-- Prev, Today, Next Buttons -->
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="prevMonthBtn"
+                class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl border border-slate-200 transition cursor-pointer"
+                title="Previous Month">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button type="button" id="todayCalBtn"
+                class="px-3 py-1.5 text-xs font-bold text-slate-700 hover:text-brand-700 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 transition cursor-pointer">
+                Today
+              </button>
+              <button type="button" id="nextMonthBtn"
+                class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl border border-slate-200 transition cursor-pointer"
+                title="Next Month">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Days of Week Header -->
+          <div class="grid grid-cols-7 gap-1 text-center font-bold text-[11px] sm:text-xs text-slate-500 uppercase tracking-wider mb-2">
+            <div class="text-rose-600 py-1">Sun</div>
+            <div class="py-1">Mon</div>
+            <div class="py-1">Tue</div>
+            <div class="py-1">Wed</div>
+            <div class="py-1">Thu</div>
+            <div class="py-1">Fri</div>
+            <div class="text-rose-600 py-1">Sat</div>
+          </div>
+
+          <!-- Dynamic Days Grid -->
+          <div id="calendarDaysGrid" class="grid grid-cols-7 gap-1 sm:gap-1.5 select-none">
+            <!-- Day buttons rendered dynamically via script.js -->
+          </div>
+
+          <!-- Bottom Summary Indicator -->
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full border-2 border-brand-600"></span>
+              Blue border indicates Today
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+              Colored dots indicate events
+            </span>
+          </div>
+        </div>
+
+        <!-- Right Side: Agenda & Event Schedule (5 Cols) -->
+        <div class="lg:col-span-5 flex flex-col border-t lg:border-t-0 lg:border-l border-slate-200/90 pt-5 lg:pt-0 lg:pl-6">
+          
+          <!-- Agenda Panel Header -->
+          <div class="flex items-start justify-between gap-2 mb-3">
+            <div>
+              <h4 id="calendarEventHeader" class="font-display font-extrabold text-base sm:text-lg text-slate-900">
+                Month Schedule
+              </h4>
+              <p id="calendarEventSubheader" class="text-xs text-slate-500 mt-0.5">
+                All scheduled events for selected period
+              </p>
+            </div>
+            <button type="button" id="showAllMonthEventsBtn"
+              class="hidden text-xs font-bold text-brand-700 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg transition cursor-pointer flex-shrink-0">
+              View All Month
+            </button>
+          </div>
+
+          <!-- Event Type Filter Pills -->
+          <div class="flex flex-wrap items-center gap-1.5 mb-4">
+            <button type="button" data-cal-filter="all"
+              class="cal-filter-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition cursor-pointer bg-brand-700 text-white shadow-xs">
+              All
+            </button>
+            <button type="button" data-cal-filter="exam"
+              class="cal-filter-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200">
+              Exams
+            </button>
+            <button type="button" data-cal-filter="academic"
+              class="cal-filter-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200">
+              Academic
+            </button>
+            <button type="button" data-cal-filter="holiday"
+              class="cal-filter-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200">
+              Holidays
+            </button>
+            <button type="button" data-cal-filter="event"
+              class="cal-filter-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200">
+              Events
+            </button>
+          </div>
+
+          <!-- Events Scrollable Container -->
+          <div id="calendarEventsList" class="space-y-2.5 overflow-y-auto max-h-[380px] sm:max-h-[430px] pr-1">
+            <!-- Event cards rendered dynamically via script.js -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Smart QR Code for Secure Problem Reporting Section -->
+  <section id="smart-qr" class="relative py-12 sm:py-16 bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-bold tracking-wide uppercase mb-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span>Campus Grievance & Facility Helpdesk</span>
+          </div>
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+            Smart QR Problem Reporting
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+            Scan location-specific QR codes installed across GEC Hassan to instantly report maintenance, lab, sanitation, or confidential student issues with 100% encrypted anonymity.
+          </p>
+        </div>
+
+        <!-- Security & Privacy Trust Badges -->
+        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-600">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span class="font-semibold text-slate-800">100% Anonymous Option</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span class="font-semibold text-slate-800">Fast Campus Dispatch</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Section Card: 2 Column Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Side: Smart QR Station Hub & Printable Poster (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Station Selector Tabs -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Campus Station</span>
+              <span id="activeStationBadge" class="text-[11px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md border border-brand-200">Zone A</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2 text-left" id="qrStationButtons">
+              <button type="button" class="qr-station-btn active px-3 py-2 rounded-xl text-xs font-semibold border transition text-left cursor-pointer bg-brand-50 border-brand-500 text-brand-800 shadow-xs" data-zone="Zone A" data-location="Central Library (Zone A)">
+                <span class="block font-bold">Central Library</span>
+                <span class="text-[10px] text-slate-500 block truncate">1st Floor & Reading Halls</span>
+              </button>
+              <button type="button" class="qr-station-btn px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 transition text-left cursor-pointer text-slate-700" data-zone="Zone B" data-location="CSE & ISE Computing Center (Zone B)">
+                <span class="block font-bold">Computing Center</span>
+                <span class="text-[10px] text-slate-500 block truncate">Labs 1 to 4 & Server Room</span>
+              </button>
+              <button type="button" class="qr-station-btn px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 transition text-left cursor-pointer text-slate-700" data-zone="Zone C" data-location="Mechanical & Civil Workshop (Zone C)">
+                <span class="block font-bold">Main Workshop</span>
+                <span class="text-[10px] text-slate-500 block truncate">Mech & Civil Blocks</span>
+              </button>
+              <button type="button" class="qr-station-btn px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 transition text-left cursor-pointer text-slate-700" data-zone="Zone D" data-location="Student Hostels - Block A & B (Zone D)">
+                <span class="block font-bold">Student Hostels</span>
+                <span class="text-[10px] text-slate-500 block truncate">Blocks A & B & Dining</span>
+              </button>
+              <button type="button" class="qr-station-btn px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 transition text-left cursor-pointer text-slate-700" data-zone="Zone E" data-location="Campus Canteen & Cafeteria (Zone E)">
+                <span class="block font-bold">Campus Canteen</span>
+                <span class="text-[10px] text-slate-500 block truncate">Student Cafeteria Area</span>
+              </button>
+              <button type="button" class="qr-station-btn px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 transition text-left cursor-pointer text-slate-700" data-zone="Confidential" data-location="Confidential Grievance & Anti-Ragging Cell">
+                <span class="block font-bold text-rose-700">Grievance Cell</span>
+                <span class="text-[10px] text-slate-500 block truncate">Confidential / Direct Admin</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Physical QR Code Sticker Preview Card -->
+          <div id="qrPrintableCard" class="bg-white rounded-3xl border-2 border-slate-800 shadow-xl p-5 sm:p-6 text-center relative overflow-hidden">
+            <!-- Top Branding Banner -->
+            <div class="flex items-center justify-center gap-2 border-b border-slate-200 pb-3 mb-4">
+              <img src="./assets/logo.png" alt="GEC Hassan Logo" class="w-8 h-8 object-contain" />
+              <div class="text-left">
+                <p class="font-bold text-xs text-slate-900 uppercase tracking-tight">Govt Engineering College Hassan</p>
+                <p class="text-[10px] text-slate-500 font-medium">Campus Voice • Smart Grievance Network</p>
+              </div>
+            </div>
+
+            <!-- Header on Sticker -->
+            <h4 class="font-display font-black text-slate-900 text-base sm:text-lg uppercase tracking-tight">
+              Scan to Report Problem
+            </h4>
+            <p class="text-xs text-slate-500 mb-3">Instant maintenance & secure student grievance</p>
+
+            <!-- QR Code Render Container -->
+            <div class="relative inline-flex items-center justify-center p-3.5 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-300 mx-auto group">
+              <!-- Dynamic QR Code Container -->
+              <div id="qrDisplayContainer" class="w-48 h-48 sm:w-52 sm:h-52 flex items-center justify-center bg-white rounded-xl shadow-inner overflow-hidden p-2">
+                <!-- Dynamic QR SVG generated via JS -->
+              </div>
+              <div class="absolute inset-0 bg-brand-900/10 rounded-2xl opacity-0 group-hover:opacity-100 transition flex items-center justify-center pointer-events-none">
+                <span class="bg-slate-900 text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shadow-sm">Ready to Scan</span>
+              </div>
+            </div>
+
+            <!-- Station Location Footer on Card -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-2">
+                <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span id="qrCurrentLocationLabel">Central Library (Zone A)</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Encrypted End-to-End • Camera or Web App Scan</p>
+            </div>
+
+            <!-- Quick Action Buttons for Sticker -->
+            <div class="mt-4 flex flex-col sm:flex-row items-center gap-2">
+              <button type="button" id="triggerScanSimulateBtn"
+                class="w-full sm:flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 hover:from-brand-700 hover:to-brand-900 text-white text-xs font-bold shadow-md shadow-brand-700/20 active:scale-95 transition cursor-pointer flex items-center justify-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                <span>Report at this Station</span>
+              </button>
+              <button type="button" id="downloadQrBtn"
+                class="w-full sm:w-auto py-2.5 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold transition cursor-pointer flex items-center justify-center gap-1.5"
+                title="Download printable sticker">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Save Sticker</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right Side: Interactive Report Form & Ticket Tracker (7 Cols) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+          
+          <!-- View Switcher Tabs: 'Submit Problem Report' vs 'Track Ticket Status' -->
+          <div class="flex items-center border-b border-slate-200 bg-slate-50/70 p-2 gap-2">
+            <button type="button" id="tabReportFormBtn"
+              class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 bg-white text-slate-900 shadow-xs border border-slate-200 cursor-pointer">
+              <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Submit Problem Report</span>
+            </button>
+            <button type="button" id="tabTrackStatusBtn"
+              class="flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-white/60 cursor-pointer">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+              <span>Track Ticket Status</span>
+            </button>
+          </div>
+
+          <!-- Panel 1: Problem Report Submission Form -->
+          <div id="reportFormPanel" class="p-5 sm:p-7 space-y-5">
+            <form id="problemReportForm" class="space-y-4">
+              
+              <!-- Location / Campus Zone & Anonymous Toggle -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="reportLocationSelect" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Campus Zone / Station <span class="text-rose-500">*</span>
+                  </label>
+                  <select id="reportLocationSelect" required
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition">
+                    <option value="Central Library (Zone A)">Central Library (Zone A)</option>
+                    <option value="CSE & ISE Computing Center (Zone B)">CSE & ISE Computing Center (Zone B)</option>
+                    <option value="Mechanical & Civil Workshop (Zone C)">Mechanical & Civil Workshop (Zone C)</option>
+                    <option value="Student Hostels - Block A & B (Zone D)">Student Hostels - Block A & B (Zone D)</option>
+                    <option value="Campus Canteen & Cafeteria (Zone E)">Campus Canteen & Cafeteria (Zone E)</option>
+                    <option value="Confidential Grievance & Anti-Ragging Cell">Confidential Grievance & Anti-Ragging Cell</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Confidentiality & Privacy
+                  </label>
+                  <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-slate-50">
+                    <div class="flex items-center gap-2">
+                      <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <span id="anonymousStatusLabel" class="text-xs font-semibold text-slate-800">100% Anonymous</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" id="anonymousToggle" class="sr-only peer" checked>
+                      <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600"></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Problem Category & Urgency Level -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="reportCategory" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Problem Category <span class="text-rose-500">*</span>
+                  </label>
+                  <select id="reportCategory" required
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition">
+                    <option value="infrastructure">Infrastructure & Classroom (Benches, Projector, Board)</option>
+                    <option value="network">Campus Wi-Fi & IT Systems (Network Drop, Lab PC)</option>
+                    <option value="electrical">Electrical & Water Supply (Outage, Dispenser, Cooler)</option>
+                    <option value="sanitation">Cleanliness & Hygiene (Restrooms, Waste Management)</option>
+                    <option value="grievance">Confidential Student Grievance / Anti-Ragging</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    Urgency Level <span class="text-rose-500">*</span>
+                  </label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <label class="flex items-center justify-center px-2 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer text-slate-700 hover:bg-slate-50 transition has-[:checked]:bg-blue-50 has-[:checked]:border-blue-500 has-[:checked]:text-blue-700">
+                      <input type="radio" name="reportUrgency" value="normal" checked class="sr-only">
+                      <span>Normal</span>
+                    </label>
+                    <label class="flex items-center justify-center px-2 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer text-slate-700 hover:bg-slate-50 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-800">
+                      <input type="radio" name="reportUrgency" value="high" class="sr-only">
+                      <span>High</span>
+                    </label>
+                    <label class="flex items-center justify-center px-2 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer text-slate-700 hover:bg-slate-50 transition has-[:checked]:bg-rose-50 has-[:checked]:border-rose-500 has-[:checked]:text-rose-700">
+                      <input type="radio" name="reportUrgency" value="emergency" class="sr-only">
+                      <span>Emergency</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Issue Title -->
+              <div>
+                <label for="reportTitle" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Issue Summary <span class="text-rose-500">*</span>
+                </label>
+                <input type="text" id="reportTitle" required placeholder="e.g., Overhead Projector not powering on in Seminar Hall"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition" />
+              </div>
+
+              <!-- Detailed Description -->
+              <div>
+                <label for="reportDescription" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Specific Details & Description <span class="text-rose-500">*</span>
+                </label>
+                <textarea id="reportDescription" rows="3" required placeholder="Provide exact details so our maintenance or grievance cell can dispatch support immediately..."
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition resize-none"></textarea>
+              </div>
+
+              <!-- Student Details (Collapsible based on Anonymous toggle) -->
+              <div id="studentDetailsBox" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div>
+                  <label for="reportStudentUSN" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Student USN (Optional)
+                  </label>
+                  <input type="text" id="reportStudentUSN" placeholder="4GH22CS000"
+                    class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500" />
+                </div>
+                <div>
+                  <label for="reportStudentContact" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">
+                    Phone / Email (For Status Updates)
+                  </label>
+                  <input type="text" id="reportStudentContact" placeholder="student@gechassan.ac.in"
+                    class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500" />
+                </div>
+              </div>
+
+              <!-- Photo / Proof Upload (Dropzone) -->
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  Optional Photo / Proof Attachment
+                </label>
+                <div id="reportProofDropzone"
+                  class="border-2 border-dashed border-slate-200 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/20 rounded-xl p-3 text-center transition cursor-pointer flex items-center justify-center gap-3">
+                  <input type="file" id="reportProofInput" accept="image/*,.pdf" class="hidden">
+                  <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <div class="text-left text-xs text-slate-600">
+                    <span id="reportProofName" class="font-semibold text-slate-800">Attach photo / evidence</span>
+                    <span class="text-slate-400 block text-[11px]">PNG, JPG or PDF up to 5MB</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-2 flex items-center justify-end">
+                <button type="submit" id="submitReportBtn"
+                  class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-800 hover:from-emerald-700 hover:to-teal-900 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-700/25 active:scale-95 transition cursor-pointer">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <span>Submit Secure Problem Report</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Panel 2: Ticket Status Tracking Panel -->
+          <div id="trackStatusPanel" class="hidden p-5 sm:p-7 space-y-6">
+            <!-- Search by Ticket ID -->
+            <div>
+              <label for="ticketSearchInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                Track Ticket Status by Reference ID
+              </label>
+              <div class="flex items-center gap-2">
+                <div class="relative flex-1">
+                  <input type="text" id="ticketSearchInput" placeholder="Enter Reference ID (e.g. GEC-84210)"
+                    class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 uppercase tracking-wider font-mono">
+                  <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <button type="button" id="trackTicketBtn"
+                  class="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs sm:text-sm font-bold shadow-sm transition active:scale-95 cursor-pointer">
+                  Search
+                </button>
+              </div>
+            </div>
+
+            <!-- Quick Demo Ticket Chips -->
+            <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100 text-xs text-slate-500">
+              <span class="font-semibold text-slate-700">Recent Samples:</span>
+              <button type="button" class="demo-ticket-pill px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-mono text-[11px] transition cursor-pointer" data-ticket="GEC-84210">
+                GEC-84210 (Lab Wi-Fi)
+              </button>
+              <button type="button" class="demo-ticket-pill px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-mono text-[11px] transition cursor-pointer" data-ticket="GEC-62940">
+                GEC-62940 (Hostel Water)
+              </button>
+              <button type="button" class="demo-ticket-pill px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-mono text-[11px] transition cursor-pointer" data-ticket="GEC-31050">
+                GEC-31050 (Library AC)
+              </button>
+            </div>
+
+            <!-- Ticket Result Card -->
+            <div id="ticketResultContainer" class="space-y-4">
+              <!-- Rendered via script.js -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Campus Voice Footer -->
+  <footer class="bg-white border-t border-slate-200 py-8 px-4 sm:px-6 lg:px-8 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-3">
+        <img src="./assets/logo.png" alt="GEC Hassan Logo" class="w-8 h-8 object-contain" />
+        <div>
+          <p class="font-bold text-slate-800">Government Engineering College, Hassan</p>
+          <p class="text-[11px] text-slate-500">Affiliated to Visvesvaraya Technological University (VTU), Belagavi</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="#top" class="hover:text-brand-700 transition">Back to Top</a>
+        <span>•</span>
+        <a href="#feed" class="hover:text-brand-700 transition">Announcements</a>
+        <span>•</span>
+        <a href="#calendar" class="hover:text-brand-700 transition">Academic Calendar</a>
+        <span>•</span>
+        <a href="#smart-qr" class="hover:text-brand-700 transition text-emerald-700">Smart QR Report</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Add Announcement Modal -->
+  <div id="addAnnouncementModal"
+    class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
+    <div
+      class="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 overflow-hidden my-6 transform transition-all duration-200">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-5 sm:px-7 py-4 sm:py-5 border-b border-slate-100 bg-slate-50/70">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center border border-brand-200/80">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-display font-extrabold text-base sm:text-lg text-slate-900">New Official Announcement</h3>
+            <p class="text-xs text-slate-500">Government Engineering College Hassan</p>
+          </div>
+        </div>
+
+        <!-- Close Button -->
+        <button type="button" id="closeModalBtn"
+          class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
+          title="Close modal (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Announcement Form -->
+      <form id="announcementForm" class="p-5 sm:p-7 space-y-4 sm:space-y-5">
+        <!-- Title Input -->
+        <div>
+          <label for="formTitle" class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Announcement Title
+            <span class="text-rose-500">*</span></label>
+          <input type="text" id="formTitle" required placeholder="e.g. Odd Semester Final Exam Timetable Released"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition" />
+        </div>
+
+        <!-- Category & Priority Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Category Select -->
+          <div>
+            <label for="formCategory" class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Category <span
+                class="text-rose-500">*</span></label>
+            <div class="relative">
+              <select id="formCategory" required
+                class="appearance-none w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition cursor-pointer">
+                <option value="academic">Academic</option>
+                <option value="events">Events</option>
+                <option value="placement">Placement</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Priority Select -->
+          <div>
+            <label for="formPriority" class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Priority Level
+              <span class="text-rose-500">*</span></label>
+            <div class="relative">
+              <select id="formPriority" required
+                class="appearance-none w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition cursor-pointer">
+                <option value="1">Normal</option>
+                <option value="2">High Priority</option>
+                <option value="3">Mandatory</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issuing Department & Custom Tag Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Issuing Authority / Department -->
+          <div>
+            <label for="formAuthor" class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Issuing Department
+              / Officer <span class="text-rose-500">*</span></label>
+            <input type="text" id="formAuthor" required placeholder="e.g. Department of Mechanical Engineering"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition" />
+          </div>
+
+          <!-- Badge Label / Custom Tag -->
+          <div>
+            <label for="formTag" class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Badge Label <span
+                class="text-slate-400 font-normal">(Optional)</span></label>
+            <input type="text" id="formTag" placeholder="e.g. Urgent, Lab Exam, 2026 Batch"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition" />
+          </div>
+        </div>
+
+        <!-- Description Input -->
+        <div>
+          <label for="formDescription" class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Announcement
+            Details <span class="text-rose-500">*</span></label>
+          <textarea id="formDescription" rows="3" required
+            placeholder="Write complete notice information, dates, instructions, or venue..."
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition resize-none"></textarea>
+        </div>
+
+        <!-- File Upload Section -->
+        <div>
+          <label class="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">Attach Official Document or Notice
+            <span class="text-slate-400 font-normal">(Optional)</span></label>
+          <!-- Hidden File Input -->
+          <input type="file" id="formFileInput" class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" />
+
+          <!-- Dropzone Container -->
+          <div id="dropzoneContainer"
+            class="border-2 border-dashed border-slate-200 hover:border-brand-500 hover:bg-brand-50/40 rounded-2xl p-4 sm:p-5 text-center cursor-pointer transition group bg-slate-50/50">
+            <!-- Dropzone Default Prompt State -->
+            <div id="dropzonePrompt" class="flex flex-col items-center justify-center gap-1.5">
+              <div
+                class="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-200/80 flex items-center justify-center text-brand-600 group-hover:scale-105 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+              </div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-800 mt-1"><span
+                  class="text-brand-700 hover:underline">Click to upload file</span> or drag and drop</p>
+              <p class="text-[11px] text-slate-400">PDF, DOC, DOCX, PNG, JPG (up to 10 MB)</p>
+            </div>
+
+            <!-- Selected File Preview State -->
+            <div id="dropzonePreview"
+              class="hidden flex items-center justify-between gap-3 bg-white p-3 rounded-xl border border-slate-200 text-left">
+              <div class="flex items-center gap-3 min-w-0">
+                <div
+                  class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center flex-shrink-0 border border-brand-200">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p id="previewFileName" class="text-xs sm:text-sm font-bold text-slate-800 truncate">document.pdf</p>
+                  <p id="previewFileSize" class="text-[10px] text-slate-500 font-medium">0 KB</p>
+                </div>
+              </div>
+              <button type="button" id="removeFileBtn"
+                class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition flex-shrink-0 cursor-pointer"
+                title="Remove uploaded file">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Action Buttons -->
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" id="cancelModalBtn"
+            class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-semibold transition cursor-pointer">Cancel</button>
+          <button type="submit"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 hover:from-brand-700 hover:to-brand-900 text-white text-xs sm:text-sm font-bold shadow-md shadow-brand-700/20 active:scale-95 transition cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Publish Announcement</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile App Bottom Navigation Bar (Visible only on mobile/tablet viewports) -->
+  <nav id="mobileAppBottomNav" class="mobile-bottom-nav md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] px-2 py-1.5" aria-label="Mobile Navigation">
+    <div class="max-w-md mx-auto flex items-center justify-around relative">
+      
+      <!-- Feed Tab -->
+      <a href="#feed" class="mobile-nav-item active flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-brand-700 active:scale-95 transition" data-nav="feed">
+        <svg class="w-5 h-5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+        <span class="text-[10px] font-bold mt-0.5 tracking-tight">Feed</span>
+      </a>
+
+      <!-- Calendar Tab -->
+      <a href="#calendar" class="mobile-nav-item flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-brand-700 active:scale-95 transition" data-nav="calendar">
+        <svg class="w-5 h-5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <span class="text-[10px] font-bold mt-0.5 tracking-tight">Calendar</span>
+      </a>
+
+      <!-- Center Action Button: Post (+) FAB -->
+      <button type="button" id="mobileAppNewPostBtn" class="mobile-nav-fab focus:outline-none" title="Create New Announcement">
+        <div class="mobile-nav-fab-btn">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <span class="text-[9.5px] font-extrabold text-brand-700 mt-0.5 tracking-tight">Post</span>
+      </button>
+
+      <!-- Smart QR Report Tab -->
+      <a href="#smart-qr" class="mobile-nav-item flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-brand-700 active:scale-95 transition" data-nav="smart-qr">
+        <svg class="w-5 h-5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+        </svg>
+        <span class="text-[10px] font-bold mt-0.5 tracking-tight">QR Report</span>
+      </a>
+
+      <!-- Search & Focus Tab -->
+      <button type="button" id="mobileAppSearchBtn" class="mobile-nav-item flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-brand-700 active:scale-95 transition" data-nav="search" title="Search Announcements">
+        <svg class="w-5 h-5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span class="text-[10px] font-bold mt-0.5 tracking-tight">Search</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification"
+    class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div
+      class="bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-800">
+      <div class="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div>
+        <p id="toastTitle" class="text-xs sm:text-sm font-bold">Announcement Published</p>
+        <p id="toastMessage" class="text-[11px] text-slate-300">Your announcement is now live on Campus Voice.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- External Script File with Search, Filter, Sort, Form, and Like Functionality -->
+  <script src="./script.js"></script>
+</body>
+
+</html>

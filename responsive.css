@@ -1,0 +1,312 @@
+/* Mobile App Responsiveness Stylesheet - Government Engineering College Hassan */
+
+/* Hide mobile app elements on desktop viewports */
+@media (min-width: 769px) {
+  .mobile-bottom-nav,
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* Mobile & Tablet App Mode (Screens 768px and below) */
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow and enable smooth natural vertical scroll without scroll lock */
+  html {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    scroll-padding-top: 70px;
+    scroll-padding-bottom: 80px;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    padding-top: 62px !important;
+    padding-bottom: 74px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fixed Top College Name Bar (Pinned at top, never scrolls away) */
+  header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 40 !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05) !important;
+    height: auto !important;
+    min-height: 62px !important;
+  }
+
+  /* Smooth scroll offsets for mobile top bar and bottom nav */
+  html {
+    scroll-padding-top: 64px;
+    scroll-padding-bottom: 80px;
+  }
+
+  /* Mobile App Bottom Navigation Bar */
+  .mobile-bottom-nav {
+    display: block !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 50 !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+    padding-top: 6px !important;
+    padding-bottom: max(6px, env(safe-area-inset-bottom)) !important;
+    user-select: none;
+  }
+
+  /* Bottom Navigation Item styling */
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    color: #64748b;
+    border-radius: 12px;
+    transition: all 0.15s ease-out;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.92);
+  }
+
+  .mobile-nav-item.active {
+    color: #1d4ed8 !important;
+  }
+
+  .mobile-nav-item.active svg {
+    color: #1d4ed8 !important;
+    stroke-width: 2.5;
+    transform: translateY(-1px);
+  }
+
+  .mobile-nav-item.active span {
+    font-weight: 800 !important;
+    color: #1d4ed8 !important;
+  }
+
+  /* Center Floating Action Button (New Post) */
+  .mobile-nav-fab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-fab-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #3b82f6 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+    border: 3px solid #ffffff;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .mobile-nav-fab:active .mobile-nav-fab-btn {
+    transform: scale(0.88);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  }
+
+  /* Mobile App Header Title & Details */
+  header > div {
+    height: auto !important;
+    min-height: 62px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  header a {
+    max-width: 100% !important;
+  }
+
+  header a img {
+    width: 40px !important;
+    height: 40px !important;
+    flex-shrink: 0 !important;
+  }
+
+  header h1 {
+    font-size: clamp(12px, 3.6vw, 15px) !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    letter-spacing: -0.01em !important;
+    color: #0f172a !important;
+    word-break: normal !important;
+  }
+
+  header p {
+    font-size: clamp(10px, 2.7vw, 12px) !important;
+    line-height: 1.2 !important;
+    margin-top: 2px !important;
+    color: #64748b !important;
+  }
+
+  /* Hero Section Touch Adjustments */
+  #top {
+    min-height: auto !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+
+  #top h1 {
+    font-size: clamp(2.2rem, 9vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  #top h2 {
+    font-size: 17px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Search Bar Touch Optimization */
+  #searchInput {
+    font-size: 14px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  /* Horizontal Filter Pills bar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    padding: 7px 12px !important;
+    font-size: 12px !important;
+  }
+
+  /* Announcements Cards Mobile Padding */
+  .announcement-card {
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+
+  /* College Calendar Mobile Grid */
+  .cal-day-cell {
+    min-height: 40px !important;
+    padding: 4px 2px !important;
+  }
+
+  .cal-day-cell span {
+    font-size: 12px !important;
+  }
+
+  /* Smart QR Station Buttons Touch Target */
+  .qr-station-btn {
+    min-height: 48px;
+    padding: 8px 10px !important;
+  }
+
+  /* Form Inputs Safe Tap Targets (Prevents iOS zoom on focus) */
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    font-size: 15px !important;
+    min-height: 42px;
+  }
+
+  /* App Bottom-Sheet Modal Transformation */
+  #addAnnouncementModal {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+
+  #addAnnouncementModal > div {
+    max-height: 88vh !important;
+    margin: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 24px !important;
+    border-top-right-radius: 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  /* Toast Notification offset above bottom app bar */
+  #toastNotification {
+    bottom: 84px !important;
+    right: 12px !important;
+    left: 12px !important;
+  }
+}
+
+/* Extra Compact Phones (Screens 420px and below) */
+@media (max-width: 420px) {
+  body {
+    padding-top: 58px !important;
+  }
+
+  header {
+    min-height: 58px !important;
+  }
+
+  header > div {
+    min-height: 58px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  header a img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  header h1 {
+    font-size: 11.5px !important;
+    line-height: 1.2 !important;
+  }
+
+  header p {
+    font-size: 9.5px !important;
+  }
+
+  .mobile-nav-item {
+    padding: 3px 6px;
+  }
+
+  .mobile-nav-item span {
+    font-size: 9px !important;
+  }
+
+  .mobile-nav-fab-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cal-day-cell {
+    min-height: 38px !important;
+  }
+
+  #qrPrintableCard {
+    padding: 14px !important;
+  }
+}
